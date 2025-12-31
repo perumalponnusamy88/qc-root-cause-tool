@@ -6,70 +6,171 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root {
+  --primary: #1f4fd8;
+  --secondary: #00a8a8;
+  --accent: #f4b400;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #2b2f38;
+  --muted: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
+  margin: 0;
+  padding: 30px;
+  background: var(--bg);
+  color: var(--text);
 }
 
+/* CONTAINER */
 .container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 8px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  padding: 25px 30px;
+  border-radius: 14px;
+  margin-bottom: 30px;
 }
 
-.section {
-  margin-bottom: 25px;
+.header h1 {
+  margin: 0 0 10px;
+  font-size: 26px;
 }
 
+.header .meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.header input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  min-width: 220px;
+}
+
+/* CARD SECTIONS */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin-bottom: 26px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+  margin: 0 0 18px;
+  font-size: 20px;
+  color: var(--primary);
+  border-left: 5px solid var(--accent);
+  padding-left: 10px;
+}
+
+/* INPUTS */
 label {
-  font-weight: bold;
+  font-weight: 600;
+  margin-bottom: 6px;
   display: block;
-  margin-bottom: 5px;
 }
 
-input, textarea {
+textarea, input[type="text"] {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  margin-bottom: 14px;
+  font-size: 14px;
 }
 
 textarea {
   resize: vertical;
 }
 
+/* 5 WHY GRID */
+.why-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 2fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.why-badge {
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 0;
+  font-weight: bold;
+}
+
+/* 5W1H TABLE */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-table, th, td {
-  border: 1px solid #ccc;
+th {
+  background: #eef2ff;
+  color: var(--primary);
+  text-align: left;
+  padding: 10px;
 }
 
-th, td {
-  padding: 8px;
-  text-align: left;
+td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ACTION */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 button {
-  background: #1976d2;
+  background: var(--primary);
   color: #fff;
   border: none;
-  padding: 10px 16px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 4px;
 }
 
 button:hover {
-  background: #125aa0;
+  background: #153bbd;
+}
+
+/* FOOTER NOTE */
+.note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* PRINT FRIENDLY */
+@media print {
+  body {
+    background: #fff;
+  }
+  .header {
+    color: #000;
+    background: none;
+  }
 }
 </style>
 </head>
@@ -77,46 +178,88 @@ button:hover {
 <body>
 
 <div class="container">
-  <h1>QC Root Cause Analysis Tool</h1>
 
-  <!-- PROBLEM STATEMENT -->
-  <div class="section">
-    <label>Problem Statement</label>
-    <textarea placeholder="Describe the issue clearly..."></textarea>
+  <!-- HEADER -->
+  <div class="header">
+    <h1>QC Root Cause Analysis (RCA)</h1>
+    <div class="meta">
+      <input type="text" placeholder="RCA ID (e.g., RCA-2026-001)">
+      <input type="text" placeholder="Project / Account">
+      <input type="text" placeholder="Prepared By">
+      <input type="text" placeholder="Date">
+    </div>
   </div>
 
-  <!-- 5 WHY ANALYSIS -->
-  <div class="section">
+  <!-- PROBLEM -->
+  <div class="card">
+    <h2>Problem Statement</h2>
+    <textarea placeholder="Clearly describe the issue, impact, and where it was identified..."></textarea>
+  </div>
+
+  <!-- 5 WHY -->
+  <div class="card">
     <h2>5 Why Analysis</h2>
-    <label>Why 1</label><input type="text">
-    <label>Why 2</label><input type="text">
-    <label>Why 3</label><input type="text">
-    <label>Why 4</label><input type="text">
-    <label>Why 5</label><input type="text">
+
+    <div class="why-row">
+      <div class="why-badge">WHY 1</div>
+      <input type="text" placeholder="Question">
+      <input type="text" placeholder="Answer / Observation">
+    </div>
+
+    <div class="why-row">
+      <div class="why-badge">WHY 2</div>
+      <input type="text" placeholder="Question">
+      <input type="text" placeholder="Answer / Observation">
+    </div>
+
+    <div class="why-row">
+      <div class="why-badge">WHY 3</div>
+      <input type="text" placeholder="Question">
+      <input type="text" placeholder="Answer / Observation">
+    </div>
+
+    <div class="why-row">
+      <div class="why-badge">WHY 4</div>
+      <input type="text" placeholder="Question">
+      <input type="text" placeholder="Answer / Observation">
+    </div>
+
+    <div class="why-row">
+      <div class="why-badge">WHY 5</div>
+      <input type="text" placeholder="Question">
+      <input type="text" placeholder="Final Root Cause">
+    </div>
   </div>
 
   <!-- 5W1H -->
-  <div class="section">
+  <div class="card">
     <h2>5W1H Analysis</h2>
     <table>
-      <tr><th>Question</th><th>Answer</th></tr>
-      <tr><td>What</td><td><input></td></tr>
-      <tr><td>Why</td><td><input></td></tr>
-      <tr><td>Where</td><td><input></td></tr>
-      <tr><td>When</td><td><input></td></tr>
-      <tr><td>Who</td><td><input></td></tr>
-      <tr><td>How</td><td><input></td></tr>
+      <tr><th>Aspect</th><th>Details</th></tr>
+      <tr><td>What</td><td><input type="text"></td></tr>
+      <tr><td>Why</td><td><input type="text"></td></tr>
+      <tr><td>Where</td><td><input type="text"></td></tr>
+      <tr><td>When</td><td><input type="text"></td></tr>
+      <tr><td>Who</td><td><input type="text"></td></tr>
+      <tr><td>How</td><td><input type="text"></td></tr>
     </table>
   </div>
 
   <!-- ACTION -->
-  <div class="section">
-    <label>Corrective / Preventive Action</label>
-    <textarea placeholder="Define actions, owner, and timeline..."></textarea>
+  <div class="card">
+    <h2>Corrective & Preventive Action</h2>
+    <textarea placeholder="Action plan, owner, timeline, verification method..."></textarea>
+
+    <div class="actions">
+      <button onclick="window.print()">Print / Save as PDF</button>
+      <div class="note">
+        * This RCA is a controlled quality document
+      </div>
+    </div>
   </div>
 
-  <button onclick="window.print()">Print / Save as PDF</button>
 </div>
 
 </body>
 </html>
+
