@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QC Root Cause Analysis Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #125aa0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>QC Root Cause Analysis Tool</h1>
+
+  <!-- PROBLEM STATEMENT -->
+  <div class="section">
+    <label>Problem Statement</label>
+    <textarea placeholder="Describe the issue clearly..."></textarea>
+  </div>
+
+  <!-- 5 WHY ANALYSIS -->
+  <div class="section">
+    <h2>5 Why Analysis</h2>
+    <label>Why 1</label><input type="text">
+    <label>Why 2</label><input type="text">
+    <label>Why 3</label><input type="text">
+    <label>Why 4</label><input type="text">
+    <label>Why 5</label><input type="text">
+  </div>
+
+  <!-- 5W1H -->
+  <div class="section">
+    <h2>5W1H Analysis</h2>
+    <table>
+      <tr><th>Question</th><th>Answer</th></tr>
+      <tr><td>What</td><td><input></td></tr>
+      <tr><td>Why</td><td><input></td></tr>
+      <tr><td>Where</td><td><input></td></tr>
+      <tr><td>When</td><td><input></td></tr>
+      <tr><td>Who</td><td><input></td></tr>
+      <tr><td>How</td><td><input></td></tr>
+    </table>
+  </div>
+
+  <!-- ACTION -->
+  <div class="section">
+    <label>Corrective / Preventive Action</label>
+    <textarea placeholder="Define actions, owner, and timeline..."></textarea>
+  </div>
+
+  <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+</body>
+</html>
