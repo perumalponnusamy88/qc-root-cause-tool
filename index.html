@@ -8,12 +8,8 @@
 <style>
 :root {
   --primary: #1f4fd8;
-  --secondary: #00a8a8;
-  --accent: #f4b400;
   --bg: #f3f6fb;
-  --card: #ffffff;
   --text: #2b2f38;
-  --muted: #6b7280;
 }
 
 * {
@@ -28,7 +24,6 @@ body {
   color: var(--text);
 }
 
-/* CONTAINER */
 .container {
   max-width: 1100px;
   margin: auto;
@@ -36,7 +31,7 @@ body {
 
 /* HEADER */
 .header {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--primary), #00a8a8);
   color: #fff;
   padding: 25px 30px;
   border-radius: 14px;
@@ -50,7 +45,7 @@ body {
 
 .header .meta {
   display: flex;
-  gap: 20px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -61,9 +56,9 @@ body {
   min-width: 220px;
 }
 
-/* CARD SECTIONS */
+/* CARD */
 .card {
-  background: var(--card);
+  background: #fff;
   border-radius: 14px;
   padding: 24px 26px;
   margin-bottom: 26px;
@@ -74,8 +69,6 @@ body {
   margin: 0 0 18px;
   font-size: 20px;
   color: var(--primary);
-  border-left: 5px solid var(--accent);
-  padding-left: 10px;
 }
 
 /* INPUTS */
@@ -98,7 +91,7 @@ textarea {
   resize: vertical;
 }
 
-/* 5 WHY GRID */
+/* 5 WHY */
 .why-row {
   display: grid;
   grid-template-columns: 80px 1fr 2fr;
@@ -116,29 +109,20 @@ textarea {
   font-weight: bold;
 }
 
-/* 5W1H TABLE */
+/* 5W1H */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th {
-  background: #eef2ff;
-  color: var(--primary);
-  text-align: left;
-  padding: 10px;
-}
-
 td {
-  padding: 10px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 0;
 }
 
-/* ACTION */
+/* ACTIONS */
 .actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -148,28 +132,40 @@ button {
   border: none;
   padding: 12px 22px;
   border-radius: 8px;
-  font-size: 14px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #153bbd;
-}
-
-/* FOOTER NOTE */
-.note {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* PRINT FRIENDLY */
+/* PRINT CLEAN PDF */
 @media print {
   body {
     background: #fff;
+    padding: 0;
   }
+
   .header {
-    color: #000;
     background: none;
+    color: #000;
+    padding: 0;
+  }
+
+  .card {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 18px;
+  }
+
+  input, textarea {
+    border: none;
+    padding: 0;
+  }
+
+  table, tr, td {
+    border: none;
+  }
+
+  button {
+    display: none;
   }
 }
 </style>
@@ -183,17 +179,30 @@ button:hover {
   <div class="header">
     <h1>QC Root Cause Analysis (RCA)</h1>
     <div class="meta">
-      <input type="text" placeholder="RCA ID (e.g., RCA-2026-001)">
-      <input type="text" placeholder="Project / Account">
-      <input type="text" placeholder="Prepared By">
-      <input type="text" placeholder="Date">
+      <input id="rcaId" placeholder="RCA ID">
+      <input id="project" placeholder="Project / Account">
+      <input id="preparedBy" placeholder="Prepared By">
+      <input id="date" placeholder="Date">
     </div>
   </div>
 
   <!-- PROBLEM -->
   <div class="card">
     <h2>Problem Statement</h2>
-    <textarea placeholder="Clearly describe the issue, impact, and where it was identified..."></textarea>
+    <textarea id="problem"></textarea>
+  </div>
+
+  <!-- 5W1H FIRST -->
+  <div class="card">
+    <h2>5W1H Analysis</h2>
+    <table>
+      <tr><td>What</td><td><input id="what"></td></tr>
+      <tr><td>Why</td><td><input id="why"></td></tr>
+      <tr><td>Where</td><td><input id="where"></td></tr>
+      <tr><td>When</td><td><input id="when"></td></tr>
+      <tr><td>Who</td><td><input id="who"></td></tr>
+      <tr><td>How</td><td><input id="how"></td></tr>
+    </table>
   </div>
 
   <!-- 5 WHY -->
@@ -202,65 +211,75 @@ button:hover {
 
     <div class="why-row">
       <div class="why-badge">WHY 1</div>
-      <input type="text" placeholder="Question">
-      <input type="text" placeholder="Answer / Observation">
+      <input id="wq1" placeholder="Question">
+      <input id="wa1" placeholder="Answer">
     </div>
 
     <div class="why-row">
       <div class="why-badge">WHY 2</div>
-      <input type="text" placeholder="Question">
-      <input type="text" placeholder="Answer / Observation">
+      <input id="wq2">
+      <input id="wa2">
     </div>
 
     <div class="why-row">
       <div class="why-badge">WHY 3</div>
-      <input type="text" placeholder="Question">
-      <input type="text" placeholder="Answer / Observation">
+      <input id="wq3">
+      <input id="wa3">
     </div>
 
     <div class="why-row">
       <div class="why-badge">WHY 4</div>
-      <input type="text" placeholder="Question">
-      <input type="text" placeholder="Answer / Observation">
+      <input id="wq4">
+      <input id="wa4">
     </div>
 
     <div class="why-row">
       <div class="why-badge">WHY 5</div>
-      <input type="text" placeholder="Question">
-      <input type="text" placeholder="Final Root Cause">
+      <input id="wq5">
+      <input id="wa5" placeholder="Final Root Cause">
     </div>
   </div>
 
-  <!-- 5W1H -->
-  <div class="card">
-    <h2>5W1H Analysis</h2>
-    <table>
-      <tr><th>Aspect</th><th>Details</th></tr>
-      <tr><td>What</td><td><input type="text"></td></tr>
-      <tr><td>Why</td><td><input type="text"></td></tr>
-      <tr><td>Where</td><td><input type="text"></td></tr>
-      <tr><td>When</td><td><input type="text"></td></tr>
-      <tr><td>Who</td><td><input type="text"></td></tr>
-      <tr><td>How</td><td><input type="text"></td></tr>
-    </table>
-  </div>
-
-  <!-- ACTION -->
+  <!-- CAPA -->
   <div class="card">
     <h2>Corrective & Preventive Action</h2>
-    <textarea placeholder="Action plan, owner, timeline, verification method..."></textarea>
+    <textarea id="capa"></textarea>
 
     <div class="actions">
-      <button onclick="window.print()">Print / Save as PDF</button>
-      <div class="note">
-        * This RCA is a controlled quality document
-      </div>
+      <button onclick="saveRCA()">Save RCA</button>
+      <button onclick="loadRCA()">Load RCA</button>
+      <button onclick="window.print()">Export PDF</button>
     </div>
   </div>
 
 </div>
 
+<script>
+function saveRCA() {
+  const id = rcaId.value;
+  if (!id) return alert("RCA ID required");
+
+  const data = {};
+  document.querySelectorAll("input, textarea").forEach(el => {
+    data[el.id] = el.value;
+  });
+
+  localStorage.setItem("RCA_" + id, JSON.stringify(data));
+  alert("RCA saved");
+}
+
+function loadRCA() {
+  const id = rcaId.value;
+  const data = JSON.parse(localStorage.getItem("RCA_" + id));
+  if (!data) return alert("RCA not found");
+
+  Object.keys(data).forEach(k => {
+    if (document.getElementById(k)) {
+      document.getElementById(k).value = data[k];
+    }
+  });
+}
+</script>
+
 </body>
 </html>
-
-
