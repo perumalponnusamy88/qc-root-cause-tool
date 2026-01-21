@@ -7,19 +7,22 @@
 
 <style>
 :root {
-  --primary: #1f4fd8;
-  --bg: #f3f6fb;
-  --text: #2b2f38;
+  --primary: #0f172a;
+  --accent: #2563eb;
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --muted: #64748b;
+  --soft: #e5e7eb;
 }
 
 * {
   box-sizing: border-box;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  padding: 30px;
+  padding: 28px;
   background: var(--bg);
   color: var(--text);
 }
@@ -31,58 +34,57 @@ body {
 
 /* HEADER */
 .header {
-  background: linear-gradient(135deg, var(--primary), #00a8a8);
+  background: linear-gradient(135deg, #020617, #0f172a);
   color: #fff;
-  padding: 25px 30px;
-  border-radius: 14px;
-  margin-bottom: 30px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  margin-bottom: 32px;
 }
 
 .header h1 {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
   font-size: 26px;
+  letter-spacing: 0.5px;
+}
+
+.header small {
+  color: #cbd5f5;
 }
 
 .header .meta {
-  display: flex;
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
-  flex-wrap: wrap;
 }
 
 .header input {
-  padding: 8px 10px;
-  border-radius: 6px;
+  padding: 9px 10px;
+  border-radius: 8px;
   border: none;
-  min-width: 220px;
 }
 
-/* CARD */
+/* SECTION */
 .card {
   background: #fff;
-  border-radius: 14px;
-  padding: 24px 26px;
-  margin-bottom: 26px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 26px 28px;
+  margin-bottom: 28px;
+  border-left: 5px solid var(--accent);
 }
 
 .card h2 {
   margin: 0 0 18px;
-  font-size: 20px;
-  color: var(--primary);
+  font-size: 19px;
+  color: var(--accent);
 }
 
 /* INPUTS */
-label {
-  font-weight: 600;
-  margin-bottom: 6px;
-  display: block;
-}
-
-textarea, input[type="text"] {
+input, textarea {
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--soft);
   margin-bottom: 14px;
   font-size: 14px;
 }
@@ -91,32 +93,38 @@ textarea {
   resize: vertical;
 }
 
-/* 5 WHY */
-.why-row {
+/* 5W1H */
+.w1h-row {
   display: grid;
-  grid-template-columns: 80px 1fr 2fr;
-  gap: 12px;
+  grid-template-columns: 80px 1fr;
+  gap: 14px;
   align-items: center;
   margin-bottom: 12px;
 }
 
+.w1h-tag {
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* 5 WHY */
+.why-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 2fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
 .why-badge {
-  background: var(--primary);
+  background: var(--accent);
   color: #fff;
   text-align: center;
-  border-radius: 8px;
-  padding: 8px 0;
-  font-weight: bold;
-}
-
-/* 5W1H */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td {
-  padding: 8px 0;
+  border-radius: 999px;
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* ACTIONS */
@@ -127,15 +135,20 @@ td {
 }
 
 button {
-  background: var(--primary);
+  background: var(--accent);
   color: #fff;
   border: none;
   padding: 12px 22px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
 }
 
-/* PRINT CLEAN PDF */
+button.secondary {
+  background: var(--primary);
+}
+
+/* PRINT CLEAN */
 @media print {
   body {
     background: #fff;
@@ -149,8 +162,7 @@ button {
   }
 
   .card {
-    box-shadow: none;
-    border-radius: 0;
+    border-left: none;
     padding: 0;
     margin-bottom: 18px;
   }
@@ -158,10 +170,6 @@ button {
   input, textarea {
     border: none;
     padding: 0;
-  }
-
-  table, tr, td {
-    border: none;
   }
 
   button {
@@ -177,7 +185,8 @@ button {
 
   <!-- HEADER -->
   <div class="header">
-    <h1>QC Root Cause Analysis (RCA)</h1>
+    <h1>QC Root Cause Analysis</h1>
+    <small>Quality Investigation Record</small>
     <div class="meta">
       <input id="rcaId" placeholder="RCA ID">
       <input id="project" placeholder="Project / Account">
@@ -192,17 +201,15 @@ button {
     <textarea id="problem"></textarea>
   </div>
 
-  <!-- 5W1H FIRST -->
+  <!-- 5W1H -->
   <div class="card">
-    <h2>5W1H Analysis</h2>
-    <table>
-      <tr><td>What</td><td><input id="what"></td></tr>
-      <tr><td>Why</td><td><input id="why"></td></tr>
-      <tr><td>Where</td><td><input id="where"></td></tr>
-      <tr><td>When</td><td><input id="when"></td></tr>
-      <tr><td>Who</td><td><input id="who"></td></tr>
-      <tr><td>How</td><td><input id="how"></td></tr>
-    </table>
+    <h2>5W1H Investigation</h2>
+    <div class="w1h-row"><div class="w1h-tag">What</div><input id="what"></div>
+    <div class="w1h-row"><div class="w1h-tag">Why</div><input id="why"></div>
+    <div class="w1h-row"><div class="w1h-tag">Where</div><input id="where"></div>
+    <div class="w1h-row"><div class="w1h-tag">When</div><input id="when"></div>
+    <div class="w1h-row"><div class="w1h-tag">Who</div><input id="who"></div>
+    <div class="w1h-row"><div class="w1h-tag">How</div><input id="how"></div>
   </div>
 
   <!-- 5 WHY -->
@@ -236,8 +243,15 @@ button {
     <div class="why-row">
       <div class="why-badge">WHY 5</div>
       <input id="wq5">
-      <input id="wa5" placeholder="Final Root Cause">
+      <input id="wa5">
     </div>
+  </div>
+
+  <!-- FINAL FINDINGS -->
+  <div class="card">
+    <h2>Final Findings & Confirmed Root Cause</h2>
+    <textarea id="finalFinding"
+      placeholder="Summarize the investigation outcome and clearly state the single confirmed root cause. This section represents the final conclusion of the RCA."></textarea>
   </div>
 
   <!-- CAPA -->
@@ -247,7 +261,7 @@ button {
 
     <div class="actions">
       <button onclick="saveRCA()">Save RCA</button>
-      <button onclick="loadRCA()">Load RCA</button>
+      <button class="secondary" onclick="loadRCA()">Load RCA</button>
       <button onclick="window.print()">Export PDF</button>
     </div>
   </div>
@@ -256,28 +270,36 @@ button {
 
 <script>
 function saveRCA() {
-  const id = rcaId.value;
-  if (!id) return alert("RCA ID required");
+  const id = rcaId.value.trim();
+  if (!id) {
+    alert("RCA ID is required to save.");
+    return;
+  }
 
   const data = {};
   document.querySelectorAll("input, textarea").forEach(el => {
-    data[el.id] = el.value;
+    if (el.id) data[el.id] = el.value;
   });
 
   localStorage.setItem("RCA_" + id, JSON.stringify(data));
-  alert("RCA saved");
+  alert("RCA saved successfully.");
 }
 
 function loadRCA() {
-  const id = rcaId.value;
+  const id = rcaId.value.trim();
   const data = JSON.parse(localStorage.getItem("RCA_" + id));
-  if (!data) return alert("RCA not found");
 
-  Object.keys(data).forEach(k => {
-    if (document.getElementById(k)) {
-      document.getElementById(k).value = data[k];
-    }
+  if (!data) {
+    alert("No RCA found for this ID.");
+    return;
+  }
+
+  Object.keys(data).forEach(key => {
+    const el = document.getElementById(key);
+    if (el) el.value = data[key];
   });
+
+  alert("RCA loaded.");
 }
 </script>
 
